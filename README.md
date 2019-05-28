@@ -1,5 +1,5 @@
 # User Data
-create and udpate database using react redux and mongodb
+create and update database using react redux and mongodb
 
 #npm install :
 install all the node packages first 
