@@ -1,6 +1,5 @@
-# webpack-basic
-Basic setup of webpack for starting any type of project with dev server and hot reload enabled
-
+# User Data
+create and udpate database using react redux and mongodb
 #npm install :
 install all the node packages first 
 
@@ -9,3 +8,5 @@ run the development server with hot reload
 
 #npm run build :
 to build the bundle for deployment
+
+open http://localhost:3002
