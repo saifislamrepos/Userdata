@@ -1,0 +1,29 @@
+.autosuggest {
+    input {
+        width: 150px;
+        font-size: 14px;
+        padding: 7px 10px;
+        border-radius: 2px;
+        -webkit-appearance: none;
+        border: 1px solid #eee;
+        margin-left: 5px;
+    }
+    .heading {
+        float: left;
+        line-height: 32px;
+    }
+    .suggest {
+        display: inline-block;
+    }
+    .suggestions {
+        p {
+            margin: 0;
+            padding: 5px;
+            text-align:left;
+            border-bottom: 1px solid #999;
+        }
+        margin-left: 5px;
+        border: 1px solid #ccc;
+        border-top: 0;
+    }
+}

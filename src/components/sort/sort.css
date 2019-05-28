@@ -1,0 +1,17 @@
+.sort{
+    margin: 10px 0;
+    padding: 10px;
+
+}
+.sort span {
+    text-transform: uppercase;
+    width: 16%;
+    display: inline-block;
+    font-size: 12px;
+    color:#999;
+    cursor: pointer;
+}
+a:hover{
+    color: #F34F4F;
+    text-decoration: underline;
+}

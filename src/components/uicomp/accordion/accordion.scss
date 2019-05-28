@@ -1,0 +1,12 @@
+.accordion-cont{
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    display: block;
+    &.show-cont {
+      transform: scaleY(1);
+    }
+    &.hide {
+      display: none;
+    }
+}
