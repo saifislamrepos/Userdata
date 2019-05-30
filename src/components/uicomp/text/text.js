@@ -8,9 +8,9 @@ class text extends React.Component {
         const message = this.props.message;
         const textclass = this.props.textclass
         return (
-                <p className={textclass}>
-                    {message}
-                </p>
+            <p className={textclass}>
+                {message}
+            </p>
         );
     }
 }

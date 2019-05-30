@@ -18,11 +18,12 @@ class newcomp extends React.Component {
     }
     handleSubmit(event){
         event.preventDefault();
-        const data = this.state;
         const formData = new FormData();
-        formData.append('userPhoto',this.state.file);
+        const filename= this.state.name.split(' ').join('')+'-'+this.state.category;
+        formData.append('photoname',filename);
         formData.append('name',this.state.name);
         formData.append('category',this.state.category);
+        formData.append('userPhoto',this.state.file);
         axios.post('/createuser', formData, {
             headers: {
               'Content-Type': 'multipart/form-data' 

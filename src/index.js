@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import basecss from './css/index.scss';
 window.store = store;
-store.subscribe(() => console.log('Look ma, Redux!!'))
+//store.subscribe(() => console.log('Look ma, Redux!!'))
 ReactDOM.render((
    <Router>
       <Provider store={store}>

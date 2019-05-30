@@ -164,6 +164,10 @@ $screen-ipad-l: 1024px !default;
 $screen-ipad-p: 768px !default;
 $screen-large-screen: $screen;
 
+body{
+    background: #d8d8d8;
+}
+
 .wr-width {
     max-width: 1140px;
     padding: 0 24px;

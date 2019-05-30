@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
 		callback(null, dir);
 	},
 	filename: function (req, file, callback) {
-		callback(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname));
+		callback(null, req.body.photoname+'.png');
 	}
 });
 const upload = multer({ storage : storage}).single('userPhoto');
@@ -85,11 +85,15 @@ exports.checkUploadPath = function checkUploadPath(req, res, next) {
     })
 }
 exports.uploadfile = function(req,res,next){
+    if (mongoose.connection.readyState != 1) {
+        throw new Error('mongodb not connected');
+        return
+    }
     upload(req,res,function(err) {
-		if(req.file) {
-			req.body.photo = req.file.filename;
-		} else {
-            next(new Error('Please attach a user photo'));
+        if(req.file) {
+            req.body.photo = req.file.filename;
+        } else {
+            next();
         }
         if(err) {
 			console.log(err)
@@ -105,6 +109,7 @@ exports.deleteuser = function deleteuser(req, res, next) {
         return
     }
     let user = req.body
+
     models['usermodel'].deleteOne(user,(err, doc) => {
         if (err) {
             next(err)
@@ -119,4 +124,35 @@ exports.deleteuser = function deleteuser(req, res, next) {
             res.end();
         })
     });
+}
+exports.updateuser = function deleteuser(req, res, next) {
+    let resp = {}
+    if (mongoose.connection.readyState != 1) {
+        throw new Error('mongodb not connected');
+        return
+    }
+    const data = req.body;
+    const newdata = {
+        _id: data.euser_id,
+        id:Math.random()
+    }
+    const olduser = {
+        name:data.eusername,
+        _id: data.euser_id
+    }
+    if(data.name != 'undefined'){
+        newdata.name=data.name;
+    }
+    if(data.category != 'undefined'){
+        newdata.category=data.category
+    }
+    if(req.body.photo){
+        newdata.photo=req.body.photo;
+    }
+    res.send("user updated");
+    models['usermodel'].findOneAndUpdate(olduser,{$set:newdata},{new: true},).then( (doc) => {
+        console.log("updated");
+    }
+        
+    );
 }

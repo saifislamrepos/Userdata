@@ -1,16 +1,7 @@
 import {
-  ADD_ARTICLE,
-  GET_LIST,
-  DELETE_USER,
   ASSIGN_LIST
 } from "../constants/action-types";
 import axios from 'axios'
-export function addArticle(payload) {
-  return {
-    type: ADD_ARTICLE,
-    payload
-  };
-}
 export function assignlist(payload) {
   return {
     type: ASSIGN_LIST,
@@ -19,10 +10,8 @@ export function assignlist(payload) {
 }
 export function deleteuser(user) {
   return (dispatch) => {
-    console.log(user)
     axios.post('/delete-user', user)
       .then((response) => {
-        console.log('sasas')
         dispatch(getlist())
       })
       .catch((error) => {
@@ -36,7 +25,6 @@ export function getlist() {
     axios.get('/getlist')
       .then((response) => {
         // handle success
-        console.log()
         dispatch(assignlist(response.data))
       })
       .catch((error) => {
@@ -44,5 +32,35 @@ export function getlist() {
           error: error.response.data
         });
       });
+  }
+}
+
+export function updateuser(user,newuser) {
+  const data = {
+    euser:user,
+    newuser:newuser
+  }
+  const filename= data.euser.name.split(' ').join('')+'-'+data.euser.category;
+  const formData = new FormData();
+  formData.append('photoname',filename);
+  formData.append('userPhoto',data.newuser.userPhoto);
+  formData.append('name',data.newuser.name);
+  formData.append('category',data.newuser.category);
+  formData.append('euser_id',data.euser._id);
+  formData.append('eusername',data.euser.name);
+  return (dispatch) => {
+    axios.post('/update-user', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data' 
+      }
+    })
+    .then((response) => {
+      dispatch(getlist())
+    })
+    .catch((error) => {
+
+      console.log(error.response.data);
+    });
+ 
   }
 }
