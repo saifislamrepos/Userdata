@@ -1,14 +1,13 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('../config/webpack.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const outputpath = "/"
-
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 var webpackConfig = merge(baseWebpackConfig, {
     output: {
@@ -18,10 +17,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     },
     mode: 'production',
     optimization: {
-        minimizer: [new UglifyJsPlugin()],
+        minimizer: [new UglifyJsPlugin(),new OptimizeCSSAssetsPlugin({})],
     },
     plugins: [
-        new cleanWebpackPlugin(['dist'], {
+        new CleanWebpackPlugin( {
             root: path.resolve(__dirname, '../'),
             verbose: true,
             dry: false
@@ -46,7 +45,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     ],
     module: {
         rules: [{
-            test: /\.css$/,
+            test: /\.(sa|sc|c)ss$/,
             use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
@@ -54,10 +53,9 @@ var webpackConfig = merge(baseWebpackConfig, {
                     },
 
                 },
-                {
-                    loader: 'css-loader'
-                }
-
+                'css-loader',
+                'sass-loader',
+       
             ]
         }]
     }

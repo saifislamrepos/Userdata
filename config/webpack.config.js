@@ -21,7 +21,10 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				query: {
-					presets: ['es2015', 'react']
+					presets: [
+						'@babel/preset-react',
+						'@babel/preset-env'
+					]
 				}
 			},
 			{
@@ -30,15 +33,11 @@ module.exports = {
 				loader: 'babel-loader',
 				options: {
 					presets: [
-					  'react',
-					  'es2015'
+					  '@babel/preset-react',
+					  '@babel/preset-env'
 					],
 					plugins: [ "transform-class-properties" ]
 				  }
-			},
-			{
-				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
 				test: /\.styl(us)?$/,

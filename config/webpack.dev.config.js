@@ -36,8 +36,12 @@ var webpackConfig = merge(baseWebpackConfig, {
 							loader: 'file-loader'
 						}
 					]
-            }
-        ]
+        },
+        {
+          test: /\.scss$/,
+          use: ['style-loader', 'css-loader', 'sass-loader']
+        },
+      ]
     }
 });
 webpackConfig.entry.push("webpack-hot-middleware/client?reload=true")
