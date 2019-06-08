@@ -6,6 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackhotmodulereplacement = require("webpack-hot-middleware");
 const app = express();
 const router = require('../routers');
+const cookieParser = require('cookie-parser');
 config.output.publicPath = '/';
 var compiler = webpack(config);
 var devmiddleware = webpackDevMiddleware(compiler, {
@@ -16,6 +17,8 @@ var devmiddleware = webpackDevMiddleware(compiler, {
 	}
 });
 var hotreload = webpackhotmodulereplacement(compiler);
+app.disable('x-powered-by');
+app.use(cookieParser());
 app.use('/', devmiddleware);
 app.use('/', hotreload);
 app.use('/', router);

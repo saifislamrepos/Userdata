@@ -85,19 +85,23 @@ class usercomp extends React.Component {
             "classname":"primary-button ml-10 submit",
             "text":"submit"
         }
+        let profilimage =  user.photo+'?v='+user.id;
+        if(typeof user.photo == "undefined") {
+            profilimage =  '/default-'+user.gender+'.png';
+        } 
         const rendercomp =( 
             <div className="pr usercomp">
-                <Imagecomp classname = "i-b mr-10 v-aligm-m" imgpath={user.photo+'?v='+user.id}/>
+                <Imagecomp classname = "i-b mr-10 v-aligm-m" imgpath={profilimage}/>
                 <Text message = {user.name} textclass="bold fs-12 i-b mr-10 camelcase"/>
                 <Text message = {user.category} textclass="i-b bold fs-12 text-uppercase"/>
                 <Button buttonprop={detailsprop} clickaction= {this.moredetails.bind(this,user)}/>
-                <Button buttonprop={updateprop} clickaction= {this.updateuser.bind(this,user)}/>
-                <Button buttonprop={deleteprop} clickaction= {this.deleteUser.bind(this,user)}/>
+                {this.props.auth && <Button buttonprop={updateprop} clickaction= {this.updateuser.bind(this,user)}/>}
+                {this.props.auth && <Button buttonprop={deleteprop} clickaction= {this.deleteUser.bind(this,user)}/>}
             </div>)
         const renderform = ( 
             <form className="pr usercomp" ref={this.formref}>
                 <label className="cursor-pointer">
-                    <Imagecomp classname = "i-b mr-10 v-aligm-m" imgpath={user.photo+'?v='+user.id}/>
+                    <Imagecomp classname = "i-b mr-10 v-aligm-m" imgpath={profilimage}/>
                     <input type="file" name="userPhoto" className="ml-5 photo-input" onChange={this.onfileChange}/>
                     <Mask/>
                 </label>

@@ -13,7 +13,7 @@ class list extends React.Component {
         const userlength = this.props.config.length;
         const listItems = this.props.config.map((user) =>
             <li key={user._id} className="mb-15 pb-10">
-                <User userdata={user}/>
+                <User userdata={user} auth={this.props.auth}/>
 
             </li>
         );

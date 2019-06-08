@@ -10,11 +10,21 @@ class newcomp extends React.Component {
         this.state = {
             name:'',
             category: '',
+            gender:'f',
             file:null,
             error:false,
             success:false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount(event){
+        axios.get('/verify')
+          .then( (response)=> {
+            console.log(error.response.data);
+          })
+          .catch( (error) => {
+            window.location="/"
+        });
     }
     handleSubmit(event){
         event.preventDefault();
@@ -23,6 +33,7 @@ class newcomp extends React.Component {
         formData.append('photoname',filename);
         formData.append('name',this.state.name);
         formData.append('category',this.state.category);
+        formData.append('gender',this.state.gender);
         formData.append('userPhoto',this.state.file);
         axios.post('/createuser', formData, {
             headers: {
@@ -34,6 +45,7 @@ class newcomp extends React.Component {
                 error : false,
                 success:true,
                 name:'',
+                gender:'f',
                 category: '',
                 file:null,
             });
@@ -83,6 +95,13 @@ class newcomp extends React.Component {
                     <label className="mr-26">
                         Category:
                         <input type="text" name="category" className="ml-5" onChange={this.onChange}/>
+                    </label>
+                    <label className="mr-26">
+                        Gender:
+                        <select type="text" name="gender" className="ml-5" onChange={this.onChange}>
+                            <option value="f">Female</option>
+                            <option value="m">Male</option>
+                        </select>
                     </label>
                     <input type="submit" value="Submit" />
                     {errorcomp}

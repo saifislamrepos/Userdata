@@ -3,11 +3,12 @@ var proxyMiddleware = require('http-proxy-middleware')
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
-const controllers = require('./config/controller');
-const bodyParser = require('body-parser');
+const router = require('./routers');
+const cookieParser = require('cookie-parser');
 app.set('view engine', 'pug');
 app.set('views','./views');
- 
+app.disable('x-powered-by');
+app.use(cookieParser());
 app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, './dist/index.html'));
 });

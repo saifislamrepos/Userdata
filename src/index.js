@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app';
-import Newcomp from './components//newcomp/newcomp.js';
+import Newcomp from './components/newcomp/newcomp.js';
+import Signin from './components/signin/signin.js';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 import { Provider } from "react-redux";
@@ -15,6 +16,8 @@ ReactDOM.render((
          <Route exact path = "/" component = {App}>
          </Route>
          <Route path = "/createcomponent" component = {Newcomp}>
+         </Route>
+         <Route path = "/signin" component = {Signin}>
          </Route>
       </Provider>
    </Router>
