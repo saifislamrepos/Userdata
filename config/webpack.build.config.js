@@ -1,5 +1,4 @@
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,6 +9,8 @@ const outputpath = "./"
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 var webpackConfig = merge(baseWebpackConfig, {
     output: {
         publicPath: outputpath,
@@ -63,7 +64,15 @@ var webpackConfig = merge(baseWebpackConfig, {
             // both options are optional
             filename: "assets/css/[name].css"
         }),
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
+        new CompressionPlugin({
+            test: /\.js(\?.*)?$/i,
+            minRatio: 0.7
+        }),
+        new BrotliPlugin({
+            test: /\.js(\?.*)?$/i,
+            minRatio: 0.7
+        })
     ],
     module: {
         rules: [{

@@ -15,6 +15,7 @@ router.use('/insertall', controllers.createmany, function (req, res, next) {
 router.use('/logout', bodyParser.json(),controllers.logout);
 router.use('/signIn', bodyParser.json(),controllers.signin);
 router.use('/profileImages',express.static(path.join(__dirname,'../','./profileImages')));
+router.get('*js', controllers.serveGzipped('text/javascript'));
 router.use('/assets',express.static(path.join(__dirname,'../dist/assets')));
 router.use(function (err, req, res, next) {
 	console.log('error');
