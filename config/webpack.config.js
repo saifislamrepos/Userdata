@@ -33,10 +33,10 @@ module.exports = {
 				loader: 'babel-loader',
 				options: {
 					presets: [
-					  '@babel/preset-react',
-					  '@babel/preset-env'
+						'@babel/preset-env',
+						'@babel/preset-react'
 					],
-					plugins: [ "transform-class-properties" ]
+					plugins: [ "dynamic-import-webpack","transform-class-properties","@babel/plugin-proposal-object-rest-spread" ]
 				  }
 			},
 			{

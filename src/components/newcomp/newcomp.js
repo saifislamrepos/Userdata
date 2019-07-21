@@ -20,7 +20,6 @@ class newcomp extends React.Component {
     componentDidMount(event){
         axios.get('/verify')
           .then( (response)=> {
-            console.log(error.response.data);
           })
           .catch( (error) => {
             window.location="/"
@@ -84,7 +83,7 @@ class newcomp extends React.Component {
             <div className="pl-15 pr-15">
                 <Header message="ADD USER" anchor={adata}/>
                 <form name="create" onSubmit={this.handleSubmit} className="i-b" id="user-form">
-                    <label>
+                    <label className="mr-20">
                         Photo:
                         <input type="file" name="userPhoto" className="ml-5" onChange={this.onfileChange}/>
                     </label>

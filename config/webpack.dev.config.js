@@ -25,24 +25,35 @@ var webpackConfig = merge(baseWebpackConfig, {
 		new ManifestPlugin()
     ],
     module: {
-		rules: [
-			{
-				test :/\.css$/,
-				use: [
-						{
-							loader: 'style-loader/url'
-						},
-						{
-							loader: 'file-loader'
-						}
-					]
+      rules: [{
+          test: /\.css$/,
+          use: [{
+              loader: 'style-loader/url'
+            },
+            {
+              loader: 'file-loader'
+            }
+          ]
         },
         {
           test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader']
         },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react'
+            ],
+            plugins: ['react-hot-loader/babel',"dynamic-import-webpack","transform-class-properties","@babel/plugin-proposal-object-rest-spread" ]
+            }
+        }
       ]
     }
 });
-webpackConfig.entry.push("webpack-hot-middleware/client?reload=true")
+webpackConfig.entry.push("react-hot-loader/patch")
+webpackConfig.entry.push("webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000")
 module.exports = webpackConfig;

@@ -48,15 +48,15 @@ class signin extends React.Component {
             <div className="pl-15 pr-15">
                 <Header message="LOGIN" anchor = {sdata}/>
                 <form name="create" className="i-b" id="user-form" onSubmit={this.handleSubmit}>
-                    <label className="mr-26">
+                    <label className="mr-26 fs-14">
                         Username:
-                        <input type="text" name="username" className="ml-5" onChange={this.onChange}/>
+                        <input type="text" name="username" className="ml-5 fs-13" onChange={this.onChange}/>
                     </label>
-                    <label className="mr-20">
-                        Uassword:
-                        <input type="password" name="password" className="ml-5" onChange={this.onChange}/>
+                    <label className="mr-20 fs-14">
+                        Password:
+                        <input type="password" name="password" className="ml-5 fs-13" onChange={this.onChange}/>
                     </label>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" className="cursor-pointer bold fs-13"/>
                 </form>
             </div>
         );

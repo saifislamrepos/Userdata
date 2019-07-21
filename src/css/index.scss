@@ -165,7 +165,7 @@ $screen-ipad-p: 768px !default;
 $screen-large-screen: $screen;
 
 body{
-    background: #d8d8d8;
+    background: #fbfbfb;
 }
 
 .wr-width {
@@ -570,7 +570,40 @@ h4 {
         top: 50%;
     }
 }
+input {
+    -webkit-appearance: none;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 8px 9px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+}
+input[type="submit"]{
+    padding: 8px 15px;
+}
 
+input:focus {
+box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+border: 1px solid rgba(81, 203, 238, 1);
+}
+
+input[type="text"]:-webkit-autofill,
+input[type="text"]:-webkit-autofill:hover, 
+input[type="text"]:-webkit-autofill:focus,
+input[type="password"]:-webkit-autofill,
+input[type="password"]:-webkit-autofill:hover, 
+input[type="password"]:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #e4f8fb inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 .lh-1 {
     line-height: 1;
 }

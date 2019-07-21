@@ -69,6 +69,9 @@ exports.getlist = function getlist(req, res, next) {
     const resp = {
         auth:req.auth
     }
+    if(typeof req.username != "undefined") {
+        resp.username = req.username;
+    }
     if (mongoose.connection.readyState != 1) {
         throw new Error('mongodb not connected');
         return
@@ -189,6 +192,7 @@ exports.verify = function _verify(req,res,next) {
     }
     axios.post("http://localhost:3000/verify", user).then( (response)=> {
         req.auth = true;
+        req.username=response.data;
         next()
       })
       .catch( (error) => {
@@ -200,7 +204,6 @@ exports.signin = function _signin(req,res,next) {
     const { username, password } = req.body;
     axios.post("http://localhost:3000/signIn", req.body).then( (response)=> {
         const cookie = response.data;
-        console.log('sucees')
         for(let cookie in response.data) {
             res.cookie(cookie,  response.data[cookie], { maxAge: 24*60*60 * 1000 })
         }
@@ -212,7 +215,7 @@ exports.signin = function _signin(req,res,next) {
     });
 }
 exports.signredirct = function _signredirct(req,res,next) {
-    return req.auth?res.send('already looged in'):res.status(401).end();
+    return req.auth?res.send(req.username):res.status(401).end();
 }
 exports.logout = function _signredirct(req,res,next) {
     res.clearCookie("token");

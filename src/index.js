@@ -22,3 +22,7 @@ ReactDOM.render((
       </Provider>
    </Router>
  ), document.getElementById('app'))
+
+if (module.hot) {
+module.hot.accept();
+}
