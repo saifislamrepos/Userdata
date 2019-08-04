@@ -190,7 +190,7 @@ exports.verify = function _verify(req,res,next) {
     if(typeof user.userid == "undefined" || typeof user.token == "undefined") {
         return next();
     }
-    axios.post("http://localhost:3000/verify", user).then( (response)=> {
+    axios.post("http://localhost:3001/verify", user).then( (response)=> {
         req.auth = true;
         req.username=response.data;
         next()
@@ -202,7 +202,8 @@ exports.verify = function _verify(req,res,next) {
 }
 exports.signin = function _signin(req,res,next) {
     const { username, password } = req.body;
-    axios.post("http://localhost:3000/signIn", req.body).then( (response)=> {
+    console.log(req.body)
+    axios.post("http://localhost:3001/signIn", req.body).then( (response)=> {
         const cookie = response.data;
         for(let cookie in response.data) {
             res.cookie(cookie,  response.data[cookie], { maxAge: 24*60*60 * 1000 })

@@ -1,11 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const envvariables = require('../config/enviromentconstants');
+const environment = process.env.environment;
+const env = envvariables[environment];
 
 function resolve(dir) {
 	return path.join(__dirname, '..', dir)
 }
 module.exports = {
-	entry: ['./src/index.js'],
+	entry: [path.resolve(env.ROOT_DIR, 'src/index.js')],
 	output: {
 		filename: 'bundle.js'
 	},

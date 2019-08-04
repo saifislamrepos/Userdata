@@ -1,24 +1,25 @@
+const envvariables = require('../config/enviromentconstants');
+const environment = process.env.environment;
+const env = envvariables[environment];
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HotModuleReplacementPlugin = require("webpack-hot-middleware");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('../config/webpack.config.js');
-
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var webpackConfig = merge(baseWebpackConfig, {
     output:{
         publicPath : '/',
-        path : path.resolve(__dirname, '../dist')
+        path : path.resolve(env.ROOT_DIR, 'dist')
     },
     mode : 'development',
     devtool: '#cheap-module-eval-source-map',
     plugins: [
         new HtmlWebpackPlugin({
           filename: 'index.html',
-          template: 'index_tem.html',
+          template: path.resolve(env.ROOT_DIR, 'index_tem.html'),
           inject: true
         }),
 		new webpack.HotModuleReplacementPlugin(),
